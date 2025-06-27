@@ -1,0 +1,153 @@
+/* .weather-card {
+  background: #ffffffdd;
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  padding: 25px;
+  max-width: 450px;
+  margin: 30px auto;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.location {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+.weather-details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.weather-icon {
+  width: 100px;
+  height: 100px;
+}
+
+.weather-stats {
+  text-align: left;
+  font-size: 1rem;
+}
+
+.weather-stats p {
+  margin: 8px 0;
+}
+
+.description {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2980b9;
+  margin-bottom: 10px;
+} */
+
+
+    .weather-container {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  background: #ffffffcc;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.location {
+  font-size: 1.8rem;
+  color: #2c3e50;
+}
+
+.main-weather {
+  margin: 20px 0;
+}
+
+.weather-icon {
+  width: 100px;
+  height: 100px;
+}
+
+.description {
+  font-size: 1.2rem;
+  color: #2980b9;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Cards layout */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.weather-card {
+  background: #f4f7fa;
+  border-radius: 12px;
+  padding: 20px;
+  width: 150px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+.weather-card h3 {
+  font-size: 1rem;
+  margin: 10px 0 5px;
+  color: #34495e;
+}
+
+.weather-card p {
+  font-size: 1.2rem;
+  color: #000;
+  font-weight: bold;
+}
+
+.icon {
+  font-size: 2rem;
+  color: #3498db;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-in {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.delay-1 {
+  animation-delay: 0.2s;
+}
+.delay-2 {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.bounce {
+  animation: bounce 2s infinite;
+}
+
+
+

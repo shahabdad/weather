@@ -1,4 +1,4 @@
-:root {
+/* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -65,4 +65,57 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+} */
+
+
+
+/* App.css */
+.weather-container {
+  text-align: center;
+  padding: 30px;
+  background: linear-gradient(to right, #ff7e5f, #feb47b); /* Updated colors */
+  min-height: 100vh;
+  color: white;
+  font-family: 'Arial', sans-serif;
+}
+
+input {
+  padding: 10px;
+  width: 250px;
+  font-size: 16px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #ffffff;
+  color: #2980b9;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.weather-info {
+  margin-top: 20px;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.weather-icon {
+  animation: spin 2s linear infinite; /* Animation for the icon */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error {
+  color: yellow;
+  margin-top: 10px;
 }
