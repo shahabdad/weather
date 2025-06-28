@@ -21,19 +21,19 @@ const WeatherDisplay = ({ weather }) => {
       </div>
 
       <div className="cards-container">
-        <div className="weather-card slide-in">
+        <div className="weather-card mt-4 slide-in">
           <FaTemperatureHigh className="icon" />
           <h3>Temperature</h3>
           <p>{main.temp}°C</p>
         </div>
 
-        <div className="weather-card slide-in delay-1">
+        <div className="weather-card mt-4 slide-in delay-1">
           <FaTint className="icon" />
           <h3>Humidity</h3>
           <p>{main.humidity}%</p>
         </div>
 
-        <div className="weather-card slide-in delay-2">
+        <div className="weather-card mt-4 slide-in delay-2">
           <FaWind className="icon" />
           <h3>Wind</h3>
           <p>{wind.speed} m/s</p>

@@ -4,14 +4,15 @@
   padding: 20px;
   text-align: center;
   font-family: 'Segoe UI', sans-serif;
-  background: #ffffffcc;
+  background: #a11d1dcc;
   border-radius: 15px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-}
+} 
 
 .location {
   font-size: 1.8rem;
   color: #2c3e50;
+  margin-top: 20px;
 }
 
 .main-weather {
@@ -19,8 +20,8 @@
 }
 
 .weather-icon {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
 }
 
 .description {
