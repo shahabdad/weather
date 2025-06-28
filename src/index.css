@@ -107,7 +107,7 @@ button {
 }
 
 .weather-icon {
-  animation: spin 2s linear infinite; /* Animation for the icon */
+  animation: spin 2s linear infinite; 
 }
 
 @keyframes spin {
