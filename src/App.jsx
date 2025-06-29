@@ -1,7 +1,3 @@
-
-
-
-
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import WeatherInput from './Input';
@@ -17,7 +13,6 @@ function App() {
 
   const apiKey = '455516afcb74211dc5a731f47e1330fb';
 
-  // 📍 Fetch weather using coordinates (auto-detect)
   const getWeatherByCoords = async (lat, lon) => {
     try {
       const response = await axios.get(
