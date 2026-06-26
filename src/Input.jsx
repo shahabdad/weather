@@ -1,85 +1,149 @@
 import React from 'react';
-import { FaSearchLocation } from 'react-icons/fa';
+import { Search, Locate, Mic } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-const WeatherInput = ({ city, setCity, getWeather, handleKeyPress }) => {
+const FAVORITE_CITIES = ['Islamabad', 'Lahore', 'Karachi', 'Mardan', 'London', 'Dubai'];
+
+const WeatherInput = ({ 
+  city, 
+  setCity, 
+  getWeather, 
+  handleKeyPress, 
+  loading, 
+  onGetLocation, 
+  onQuickSearch,
+  recentSearches = []
+}) => {
+
+  const handleVoiceSearch = () => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      alert("Voice search is not supported in this browser.");
+      return;
+    }
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+    
+    recognition.start();
+    
+    recognition.onresult = (event) => {
+      const spokenText = event.results[0][0].transcript;
+      let cleanQuery = spokenText.trim().toLowerCase();
+      // Remove voice filler like "weather in..."
+      if (cleanQuery.startsWith('weather in ')) {
+        cleanQuery = cleanQuery.substring(11);
+      } else if (cleanQuery.startsWith('weather ')) {
+        cleanQuery = cleanQuery.substring(8);
+      }
+      if (cleanQuery) {
+        setCity(cleanQuery);
+        onQuickSearch(cleanQuery);
+      }
+    };
+
+    recognition.onerror = (e) => {
+      console.error("Speech recognition error", e);
+    };
+  };
+
   return (
-    <>
-      <div className="input-container">
-        <div className="input-wrapper">
-          <FaSearchLocation className="location-icon" />
+    <motion.div 
+      className="search-container-block"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
+      <div className="search-section">
+        <div className="search-bar-wrapper">
+          <Search className="search-icon" />
           <input
             type="text"
-            placeholder="Enter city name..."
+            className="search-input"
+            placeholder="Search for a city..."
             value={city}
             onChange={(e) => setCity(e.target.value)}
-            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyPress}
+            disabled={loading}
           />
+          <motion.button
+            type="button"
+            className="voice-search-btn"
+            onClick={handleVoiceSearch}
+            title="Search with voice"
+            disabled={loading}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <Mic className="voice-mic-icon" />
+          </motion.button>
+          <motion.button
+            className="location-trigger-btn"
+            onClick={onGetLocation}
+            title="Use current location"
+            disabled={loading}
+            type="button"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <Locate className={loading ? "gps-icon loading" : "gps-icon"} />
+          </motion.button>
         </div>
-        <button className="weather-button" onClick={getWeather}>
-          Get Weather
-        </button>
+        <motion.button 
+          className="search-submit-btn" 
+          onClick={getWeather} 
+          disabled={loading || !city.trim()}
+          whileHover={loading || !city.trim() ? {} : { scale: 1.02 }}
+          whileTap={loading || !city.trim() ? {} : { scale: 0.98 }}
+        >
+          Search
+        </motion.button>
       </div>
 
-      {/* Internal CSS Styling */}
-      <style jsx="true">{`
-        .input-container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          margin-top: 30px;
-        }
+      <div className="quick-lists-container">
+        <div className="city-list-row">
+          <span className="list-row-label">Favorites:</span>
+          <div className="pills-grid">
+            {FAVORITE_CITIES.map((name) => (
+              <motion.button
+                key={name}
+                type="button"
+                className="city-pill"
+                onClick={() => onQuickSearch(name)}
+                disabled={loading}
+                whileHover={{ scale: 1.05, y: -1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {name}
+              </motion.button>
+            ))}
+          </div>
+        </div>
 
-        .input-wrapper {
-          display: flex;
-          align-items: center;
-          background: #f1f1f1;
-          padding: 10px 15px;
-          border-radius: 50px;
-          width: 280px;
-          margin-bottom: 15px;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .input-wrapper input {
-          flex: 1;
-          border: none;
-          background: transparent;
-          font-size: 16px;
-          padding-left: 10px;
-          outline: none;
-        }
-
-        .location-icon {
-          color: #3498db;
-          font-size: 20px;
-          animation: pulse 2s infinite;
-        }
-
-        .weather-button {
-          background-color: #3498db;
-          color: white;
-          padding: 10px 25px;
-          font-size: 16px;
-          border: none;
-          border-radius: 25px;
-          cursor: pointer;
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .weather-button:hover {
-          transform: scale(1.05);
-          box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
-        }
-
-        @keyframes pulse {
-          0% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.2); opacity: 0.6; }
-          100% { transform: scale(1); opacity: 1; }
-        }
-      `}</style>
-    </>
+        {recentSearches.length > 0 && (
+          <div className="city-list-row mt-2">
+            <span className="list-row-label">Recents:</span>
+            <div className="pills-grid">
+              {recentSearches.map((name, idx) => (
+                <motion.button
+                  key={`${name}-${idx}`}
+                  type="button"
+                  className="city-pill recent-pill"
+                  onClick={() => onQuickSearch(name)}
+                  disabled={loading}
+                  whileHover={{ scale: 1.05, y: -1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {name}
+                </motion.button>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </motion.div>
   );
 };
 
 export default WeatherInput;
-

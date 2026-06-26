@@ -1,49 +1,132 @@
-.weather-container {
-  text-align: center;
-  padding: 30px;
-  background: linear-gradient(to right, #ff7e5f, #feb47b); /* Updated colors */
+:root {
+  --primary-color: #38bdf8;
+  --primary-glow: rgba(56, 189, 248, 0.35);
+  --bg-gradient: linear-gradient(135deg, #0b1528 0%, #0f1e3d 40%, #1c1032 100%);
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-border-focus: rgba(255, 255, 255, 0.35);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --card-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+  --error-bg: rgba(239, 68, 68, 0.15);
+  --error-border: rgba(239, 68, 68, 0.3);
+  --error-text: #fca5a5;
+  --font-main: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background: #060a13;
+  color: var(--text-primary);
   min-height: 100vh;
-  color: white;
-  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  transition: color 0.6s ease;
 }
 
-input {
-  padding: 10px;
-  width: 250px;
-  font-size: 16px;
-  margin-right: 10px;
-  border: none;
-  border-radius: 5px;
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-button {
-  padding: 10px 15px;
-  font-size: 16px;
-  background-color: #ffffff;
-  color: #2980b9;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+/* ---------------------------------------------------- */
+/* Dynamic Themes: Color Palettes requested by the user */
+/* ---------------------------------------------------- */
+
+.theme-sunny {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 40%, #fde68a 100%);
+  --primary-color: #ff9800;
+  --primary-glow: rgba(255, 152, 0, 0.35);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-border-focus: rgba(255, 152, 0, 0.4);
 }
 
-.weather-info {
-  margin-top: 20px;
-  background-color: rgba(255, 255, 255, 0.2);
-  padding: 20px;
-  border-radius: 10px;
-  display: inline-block;
+.theme-cloudy {
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 50%, #e5e7eb 100%);
+  --primary-color: #6b7280;
+  --primary-glow: rgba(107, 114, 128, 0.3);
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-border-focus: rgba(107, 114, 128, 0.4);
 }
 
-.weather-icon {
-  animation: spin 2s linear infinite; 
+.theme-rain {
+  background: linear-gradient(135deg, #090e1a 0%, #0f172a 50%, #1e293b 100%);
+  --primary-color: #38bdf8;
+  --primary-glow: rgba(56, 189, 248, 0.35);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-border-focus: rgba(56, 189, 248, 0.4);
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.theme-snow {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+  --primary-color: #06b6d4;
+  --primary-glow: rgba(6, 182, 212, 0.35);
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #475569;
+  --glass-bg: rgba(255, 255, 255, 0.3);
+  --glass-border: rgba(255, 255, 255, 0.35);
+  --glass-border-focus: rgba(6, 182, 212, 0.4);
 }
 
-.error {
-  color: yellow;
-  margin-top: 10px;
+.theme-thunder {
+  background: linear-gradient(135deg, #0c0a21 0%, #1e1b4b 50%, #2e1065 100%);
+  --primary-color: #8b5cf6;
+  --primary-glow: rgba(139, 92, 246, 0.35);
+  --text-primary: #f8fafc;
+  --text-secondary: #c084fc;
+  --text-muted: #a78bfa;
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-border-focus: rgba(139, 92, 246, 0.4);
+}
+
+.theme-night {
+  background: linear-gradient(135deg, #020617 0%, #030712 50%, #090d16 100%);
+  --primary-color: #6366f1;
+  --primary-glow: rgba(99, 102, 241, 0.35);
+  --text-primary: #f8fafc;
+  --text-secondary: #a5b4fc;
+  --text-muted: #6366f1;
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-border-focus: rgba(99, 102, 241, 0.4);
+}
+
+.theme-default {
+  background: linear-gradient(135deg, #0b1528 0%, #0f1e3d 45%, #19102c 100%);
+  --primary-color: #38bdf8;
+  --primary-glow: rgba(56, 189, 248, 0.35);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-border-focus: rgba(56, 189, 248, 0.4);
 }

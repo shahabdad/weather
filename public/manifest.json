@@ -1,0 +1,16 @@
+{
+  "short_name": "Skyline",
+  "name": "Skyline Weather Dashboard",
+  "icons": [
+    {
+      "src": "/src/assets/react.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#060a13",
+  "theme_color": "#060a13",
+  "display": "standalone",
+  "orientation": "portrait"
+}
